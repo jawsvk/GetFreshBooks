@@ -5,6 +5,7 @@ using System.Web;
 
 namespace GetFreshBooks
 {
+    using GetFreshBooks.Models;
     public class BusinessLogic
     {
         Mybooks context = new Mybooks();

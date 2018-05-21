@@ -1,4 +1,4 @@
-namespace GetFreshBooks
+namespace GetFreshBooks.Models
 {
     using System;
     using System.Data.Entity;
