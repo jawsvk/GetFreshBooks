@@ -46,10 +46,10 @@ namespace GetFreshBooks
                   .WithValueExpression((i => i.Stock.ToString()));
                     cols.Add("Price").WithColumnName("Book_Price")
                   .WithHeaderText("Price").WithValueExpression((i => i.Price.ToString("C2")));
-                    cols.Add("Edit").WithHtmlEncoding(false)
-                 .WithSorting(false)
-                 .WithHeaderText(" ")
-                 .WithValueExpression((p, c) => c.UrlHelper.Action("Detail", "Inventory", new { id = p.BookID }))
+                cols.Add("Edit").WithHtmlEncoding(false)
+             .WithSorting(false)
+             .WithHeaderText(" ")
+             .WithValueExpression((p, c) => c.UrlHelper.Action("Detail", "Inventory", new {id = p.BookID}))
                  .WithValueTemplate("<a href='{Value}' class='btn btn-primary' role='button'>Edit</a>");
                     cols.Add("Delete").WithHtmlEncoding(false)
                         .WithSorting(false)

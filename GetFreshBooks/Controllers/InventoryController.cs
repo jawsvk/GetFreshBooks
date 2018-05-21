@@ -19,10 +19,10 @@ namespace GetFreshBooks.Controllers
             return View();
         }
 
-        public ActionResult Detail(int bookid)
+        public ActionResult Detail(string id)
         {
-
-            return PartialView(@"~/Views/Shared/_EditPopup.cshtml", context.Books.Where(p => p.BookID == bookid).First());
+            int x = Convert.ToInt32(id);
+            return PartialView(@"~/Views/Shared/_EditPopup.cshtml", context.Books.Where(p => p.BookID == x).First());
         }
     }
 }
