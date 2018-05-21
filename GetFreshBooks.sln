@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27703.2000
+VisualStudioVersion = 15.0.27130.2036
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GetFreshBooks", "GetFreshBooks\GetFreshBooks.csproj", "{B982892D-66CA-4DDA-9356-3D55B5DBFDAF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GetFreshBooksV2", "GetFreshBooksV2\GetFreshBooksV2.csproj", "{E3DA13E7-726E-41C0-9ADC-5E376C7B9C28}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{B982892D-66CA-4DDA-9356-3D55B5DBFDAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B982892D-66CA-4DDA-9356-3D55B5DBFDAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B982892D-66CA-4DDA-9356-3D55B5DBFDAF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E3DA13E7-726E-41C0-9ADC-5E376C7B9C28}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E3DA13E7-726E-41C0-9ADC-5E376C7B9C28}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E3DA13E7-726E-41C0-9ADC-5E376C7B9C28}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E3DA13E7-726E-41C0-9ADC-5E376C7B9C28}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
