@@ -1,20 +1,8 @@
 ﻿
-@{
-    ViewBag.Title = "InventoryView";
-}
-@using MVCGrid.Web
 @using System.Linq
 @using GetFreshBooks.Models
 @using MVCGrid.Models
 @model GetFreshBooks.Models.Book
-
-<h2>Inventory Management</h2>
-<br />
-<br />
-
-<a href="#" class="btn btn-info" onclick="AddNewBook(0)">Add New Book</a>
-
-@Html.MVCGrid("Inventory")
 
 
 <div class="modal fade" id="MyModal">
@@ -56,13 +44,4 @@
         </div>
     </div>
 </div>
-
-
-<script>
-    function AddNewBook(BookID) {
-        $("#form")[0].reset();
-        $("#ModalTitle").html("Add New Book");
-        $("#MyModal").modal();
-    }
-</script>
 
