@@ -7,10 +7,6 @@ namespace GetFreshBooks
 {
     public class Class1
     {
-        //Just Testing ..by susu
-
-        //testing branches......by ssss
-       
        
     }
 }
