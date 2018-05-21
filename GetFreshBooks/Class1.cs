@@ -7,6 +7,6 @@ namespace GetFreshBooks
 {
     public class Class1
     {
-       
+      
     }
 }
