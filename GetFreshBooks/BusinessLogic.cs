@@ -46,7 +46,7 @@ namespace GetFreshBooks
                 {
                     c.Quantity++;
                     found = true;
-                    CalculatePrice(c.Price, 1);
+                    CalculatePrice(c.Price);
                     break;
                 }
             }
@@ -57,7 +57,7 @@ namespace GetFreshBooks
                 Book book = query.First();
                 CartBook cbook = new CartBook(book.ISBN, book.Title, book.Author, (double)book.Price);
                 cBookList.Add(cbook);
-                CalculatePrice(cbook.Price, 1);
+                CalculatePrice(cbook.Price);
 
             }
 
@@ -69,20 +69,23 @@ namespace GetFreshBooks
         {
 
             List<CartBook> cBookList = (List<CartBook>)HttpContext.Current.Session[HttpContext.Current.User.Identity.GetUserId()];
-            foreach (CartBook c in cBookList)
-            {
-                if (c.Isbn == isbn)
-                {
-                    cBookList.Remove(c);
-                    HttpContext.Current.Session["total"] = (double)HttpContext.Current.Session["total"] - (c.Price * c.Quantity);
 
-                    break;
+           
+                foreach (CartBook c in cBookList)
+                {
+                    if (c.Isbn == isbn)
+                    {
+                        cBookList.Remove(c);
+                        HttpContext.Current.Session["total"] = ((double)HttpContext.Current.Session["total"] - (c.Price * c.Quantity)) - 0 < 0.00 ? 0 : ((double)HttpContext.Current.Session["total"] - (c.Price * c.Quantity));
+
+                        break;
+                    }
+
                 }
 
-            }
-
-            HttpContext.Current.Session[HttpContext.Current.User.Identity.GetUserId()] = cBookList;
-
+                HttpContext.Current.Session[HttpContext.Current.User.Identity.GetUserId()] = cBookList;
+            
+            
         }
 
         public static void CheckoutCart()
@@ -91,9 +94,9 @@ namespace GetFreshBooks
             HttpContext.Current.Session["total"] = null;
         }
 
-        public static void CalculatePrice(double price, int quantity)
+        public static void CalculatePrice(double price)
         {
-            HttpContext.Current.Session["total"] = Convert.ToDouble(HttpContext.Current.Session["total"]) + price * quantity;
+            HttpContext.Current.Session["total"] = Convert.ToDouble(HttpContext.Current.Session["total"]) + price;
 
         }
         
