@@ -391,12 +391,11 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Inventory\Index.cshtml" />
-    <Content Include="Views\Inventory\save.cshtml" />
     <Content Include="Views\Inventory\delete.cshtml" />
     <Content Include="Views\Cart\CheckOut.cshtml" />
-    <Content Include="Views\Inventory\AddPopup.cshtml" />
     <Content Include="Views\Message\Index.cshtml" />
     <Content Include="Views\Cart\Index.cshtml" />
+    <Content Include="Views\Inventory\save.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
