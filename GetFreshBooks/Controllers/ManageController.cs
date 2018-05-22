@@ -54,6 +54,14 @@ namespace GetFreshBooks.Controllers
         // GET: /Manage/Index
         public async Task<ActionResult> Index(ManageMessageId? message)
         {
+            ApplicationDbContext context = new ApplicationDbContext();
+            var currentUser = context.Users
+                .Where(x => x.Email == User.Identity.Name)
+                .FirstOrDefault();
+
+            ViewBag.FirstName = currentUser.FirstName;
+            ViewBag.LastName = currentUser.LastName;
+
             ViewBag.StatusMessage =
                 message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
                 : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."

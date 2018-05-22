@@ -2,14 +2,17 @@
 @{
     ViewBag.Title = "Index";
 }
-
-<h1>Cart</h1>
+@using Microsoft.AspNet.Identity;
+<h2>Cart</h2>
 
 <hr />
 
-@{
-    List<CartBook> cart = (List<CartBook>)System.Web.HttpContext.Current.Session["items"];
-}
+
+
+    @*<div>@user</div>
+    <div>@User.Identity.GetUserId()</div>*@
+
+    @{List<CartBook> cart = (List<CartBook>)System.Web.HttpContext.Current.Session[User.Identity.GetUserId()];}
 
 <div class="container">
     @{ViewBag.totalPrice = 0; }

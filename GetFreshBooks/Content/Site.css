@@ -1,4 +1,9 @@
-﻿.slick-dots {
+﻿
+.tablecontainer span.field-validation-error {
+    color: red;
+}
+
+.slick-dots {
     margin-top: 24px;
 }
 

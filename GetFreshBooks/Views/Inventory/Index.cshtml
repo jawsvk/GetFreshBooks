@@ -1,50 +1,43 @@
 ﻿
 @{
-    Layout = null;
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<!DOCTYPE html>
-<html>
 
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+@section styles {
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css" />
     <link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
-    <style>
-        span.field-validation-error {
-            color: red;
-        }
-    </style>
-</head>
+}
 
-<body>
-    <h2>Inventory Management</h2>
-    <div style="width:90%; margin:0 auto" class="tablecontainer">
-        <a class="popup btn btn-primary" href="/Inventory/Save/0" style="margin-bottom:20px; margin-top:20px;">Add New Book</a>
-        <table id="myTable">
-            <thead>
-                <tr>
-                    <th>Book ID</th>
-                    <th>Title</th>
-                    <th>Category ID</th>
-                    <th>ISBN</th>
-                    <th>Author</th>
-                    <th>Stock</th>
-                    <th>Price</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
 
-                </tr>
-            </thead>
-        </table>
-    </div>
+<h2>Inventory Management</h2>
+<div style="width:90%; margin:0 auto" class="tablecontainer">
+    <a class="popup btn btn-primary" href="/Inventory/Save/0" style="margin-bottom:20px; margin-top:20px;">Add New Book</a>
+    <table id="myTable">
+        <thead>
+            <tr>
+                <th>Book ID</th>
+                <th>Title</th>
+                <th>Category ID</th>
+                <th>ISBN</th>
+                <th>Author</th>
+                <th>Stock</th>
+                <th>Price</th>
+                <th>Edit</th>
+                <th>Delete</th>
+
+            </tr>
+        </thead>
+    </table>
+</div>
+
+
+
+@section scripts {
     <script src="~/Scripts/jquery-3.3.1.min.js"></script>
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
     <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
-
 
     <script>
         $(document).ready(function () {
@@ -55,7 +48,7 @@
                     "datatype": "json"
                 },
                 "columns": [
-                    { "data": "BookID", "autoWidth": true },
+                    { "data": "BookID", "autoWidth": true},
                     { "data": "Title", "autoWidth": true },
                     { "data": "CategoryID", "autoWidth": true },
                     { "data": "ISBN", "autoWidth": true },
@@ -64,12 +57,12 @@
                     { "data": "Price", "autoWidth": true },
                     {
                         "data": "BookID", "width": "50px", "orderable": false, "render": function (data) {
-                            return '<a class="popup" href="/Inventory/Save/'+data+'">Edit</a>';
+                            return '<a class="popup btn btn-default" href="/Inventory/Save/' + data + '">Edit</a>';
                         }
                     },
                     {
                         "data": "BookID", "width": "50px", "orderable": false, "render": function (data) {
-                            return '<a class="popup" href="/Inventory/delete/'+data+'">Delete</a>';
+                            return '<a class="popup btn btn-danger" href="/Inventory/delete/' + data + '">Delete</a>';
                         }
                     }
                 ]
@@ -98,11 +91,11 @@
                         autoOpen: false,
                         resizable: false,
                         model: true,
-                        title: 'Popup Dialog',
                         height: 550,
                         width: 600,
                         close: function () {
                             $dialog.dialog('destroy').remove();
+                            window.location.reload();
                         }
                     })
 
@@ -130,7 +123,6 @@
         })
 
     </script>
-</body>
-</html>
-@*@Html.Partial("~/Views/Inventory/AddPopup.cshtml")*@
+}
+
 
