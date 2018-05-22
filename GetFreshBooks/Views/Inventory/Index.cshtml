@@ -22,6 +22,8 @@
                 <th>Author</th>
                 <th>Stock</th>
                 <th>Price</th>
+                <th>Edit</th>
+                <th>Delete</th>
 
             </tr>
         </thead>
@@ -34,13 +36,16 @@
     }
 </style>
 @section Scripts{
-<script src="//cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>
+    <script src="//cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>
+    <script src="~/Scripts/jquery-3.1.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
     <script>
-            $(document).ready(function () {
-            $('#myTable').DataTable({
-                "ajax": {
-                    "url": "/Inventory/loaddata",
-                    "type": "GET",
+        var oTable = $('#myTable').DataTable({
+            "ajax": {
+                    "url": '/Inventory/loaddata',
+                    "type": "get",
                     "datatype": "json"
                 },
                 "columns": [
@@ -50,18 +55,82 @@
                     { "data": "ISBN", "autoWidth": true },
                     { "data": "Author", "autoWidth": true },
                     { "data": "Stock", "autoWidth": true },
-                    { "data": "Price", "autoWidth": true }
-
+                    { "data": "Price", "autoWidth": true },
+                    {
+                        "data": "BookID", "width": "50px", "orderable": false, "render": function (data) {
+                            return '<a class="btn btn-info" href="/Inventory/save/' + data + '">Edit</a>';
+                        }
+                    },
+                    {
+                        "data": "BookID", "width": "50px", "orderable": false, "render": function (data) {
+                            return '<a class"popup" href="/Inventory/delete/' + data + '">Delete</a>';
+                        }
+                    }
                 ]
-            });
+            
         });
 
-    function AddNewBook(BookID) {
-            $("#form")[0].reset();
-        $("#ModalTitle").html("Add New Book");
-        $("#MyModal").modal();
-    }
+        $('.tablecontainer').on('click', 'a.btn', function (e) {
+            e.preventDefault();
+            OpenPopup($(this).attr('href'));
+        })
 
-</script>
-    }
-@Html.Partial("~/Views/Shared/AddPopup.cshtml")
+        function OpenPopup(pageUrl) {
+            var $pageContent = $('<div/>');
+            $pageContent.load(pageUrl, function () {
+                $('#popupForm', $pageContent).removeData('validator');
+                $('#popupForm', $pageContent).removeData('unobtrusiveValidation');
+                $.validator.unobtrusive.parse('form');
+
+            });
+
+            $dialog = $('<div class="popupWindow" style="overflow:auto"></div>')
+                .html($pageContent)
+                .dialog({
+                    draggable: false,
+                    autoOpen: false,
+                    resizable: false,
+                    model: true,
+                    title: 'Popup Dialog',
+                    height: 550,
+                    width: 600,
+                    close: function () {
+                        $dialog.dialog('destroy').remove();
+                    }
+                })
+
+
+            $('.popupWindow').on('submit', '#popupForm', function (e) {
+                var url = $('#popupForm')[0].action;
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: $('#popupForm').serialize(),
+                    success: function (data) {
+                        if (data.status) {
+                            $dialog.dialog('close');
+                            oTable.ajax.reload();
+                        }
+                    }
+                })
+
+                e.preventDefault();
+            })
+            $dialog.dialog('open');
+        }
+
+        function AddNewBook() {
+            $("#form")[0].reset();
+            $("#ModalTitle").html("Add New Book");
+            $("#MyModal").modal();
+        }
+        function editBook(BookID) {
+            $("#form")[0].reset();
+            $("#ModalTitle").html("Edit Book Details");
+            $("#EditModal").modal();
+        }
+
+    </script>
+}
+@Html.Partial("~/Views/Inventory/AddPopup.cshtml")
+
