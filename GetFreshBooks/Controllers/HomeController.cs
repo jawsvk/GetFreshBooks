@@ -17,7 +17,7 @@ namespace GetFreshBooks.Controllers
         // [Authorize(Roles ="User,Admin")]
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "GetFreshBooks";
 
             return View();
         }
