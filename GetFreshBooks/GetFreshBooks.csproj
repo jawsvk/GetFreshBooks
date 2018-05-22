@@ -218,6 +218,12 @@
     <Content Include="Content\components\css-spaces\dist\spaces.css" />
     <Content Include="Content\components\css-spaces\dist\spaces.min.css" />
     <Content Include="Content\components\css-spaces\gulpfile.js" />
+    <Content Include="Content\components\slick-carousel\slick\ajax-loader.gif" />
+    <Content Include="Content\components\slick-carousel\slick\fonts\slick.svg" />
+    <Content Include="Content\components\slick-carousel\slick\slick-theme.css" />
+    <Content Include="Content\components\slick-carousel\slick\slick.css" />
+    <Content Include="Content\components\slick-carousel\slick\slick.js" />
+    <Content Include="Content\components\slick-carousel\slick\slick.min.js" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="favicon.ico" />
@@ -294,9 +300,31 @@
     <Content Include="Content\components\css-spaces\source\_settings.bootstrap.scss" />
     <Content Include="Content\components\css-spaces\source\_settings.scss" />
     <Content Include="Content\components\css-spaces\source\_widths.scss" />
+    <Content Include="Content\components\slick-carousel\.bower.json" />
+    <Content Include="Content\components\slick-carousel\bower.json" />
+    <Content Include="Content\components\slick-carousel\component.json" />
+    <Content Include="Content\components\slick-carousel\CONTRIBUTING.markdown" />
+    <Content Include="Content\components\slick-carousel\ISSUE_TEMPLATE.md" />
+    <Content Include="Content\components\slick-carousel\LICENSE" />
+    <Content Include="Content\components\slick-carousel\Makefile" />
+    <Content Include="Content\components\slick-carousel\README.markdown" />
+    <Content Include="Content\components\slick-carousel\slick.jquery.json" />
+    <Content Include="Content\components\slick-carousel\slick\config.rb" />
+    <Content Include="Content\components\slick-carousel\slick\fonts\slick.eot" />
+    <Content Include="Content\components\slick-carousel\slick\fonts\slick.ttf" />
+    <Content Include="Content\components\slick-carousel\slick\fonts\slick.woff" />
+    <Content Include="Content\components\slick-carousel\slick\slick-theme.less" />
+    <Content Include="Content\components\slick-carousel\slick\slick-theme.scss" />
+    <Content Include="Content\components\slick-carousel\slick\slick.less" />
+    <Content Include="Content\components\slick-carousel\slick\slick.scss" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
-    <Content Include="Scripts\jquery-1.10.2.js" />
-    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\jquery-3.3.1.js" />
+    <Content Include="Scripts\jquery-3.3.1.min.js" />
+    <Content Include="Scripts\jquery-3.3.1.slim.js" />
+    <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
+    <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.3.1.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
@@ -341,7 +369,6 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
