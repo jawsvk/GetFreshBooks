@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Microsoft.AspNet.Identity;
 
 namespace GetFreshBooks
 {
     using GetFreshBooks.Models;
     public static class BusinessLogic
     {
-        static Mybooks context = new Mybooks(); 
+        static Mybooks context = new Mybooks();
 
         public static List<Book> GetAllBooks
         {
@@ -28,13 +29,14 @@ namespace GetFreshBooks
 
         public static void AddToCart(string isbn)
         {
-            if (HttpContext.Current.Session["items"] == null)
+            if (HttpContext.Current.Session[HttpContext.Current.User.Identity.GetUserId()] == null)
             {
-                HttpContext.Current.Session["items"] = new List<CartBook>();
+                HttpContext.Current.Session[HttpContext.Current.User.Identity.GetUserId()] = new List<CartBook>();
                 HttpContext.Current.Session["total"] = 0;
+                
             }
 
-            List<CartBook> cBookList = (List<CartBook>)HttpContext.Current.Session["items"];
+            List<CartBook> cBookList = (List<CartBook>)HttpContext.Current.Session[HttpContext.Current.User.Identity.GetUserId()];
 
             bool found = false;
 
@@ -59,14 +61,14 @@ namespace GetFreshBooks
 
             }
 
-            HttpContext.Current.Session["items"] = cBookList;
+            HttpContext.Current.Session[HttpContext.Current.User.Identity.GetUserId()] = cBookList;
 
         }
 
         public static void DeleteFromCart(string isbn)
         {
 
-            List<CartBook> cBookList = (List<CartBook>)HttpContext.Current.Session["items"];
+            List<CartBook> cBookList = (List<CartBook>)HttpContext.Current.Session[HttpContext.Current.User.Identity.GetUserId()];
             foreach (CartBook c in cBookList)
             {
                 if (c.Isbn == isbn)
@@ -79,13 +81,13 @@ namespace GetFreshBooks
 
             }
 
-            HttpContext.Current.Session["items"] = cBookList;
+            HttpContext.Current.Session[HttpContext.Current.User.Identity.GetUserId()] = cBookList;
 
         }
 
         public static void CheckoutCart()
         {
-            HttpContext.Current.Session["items"] = null;
+            HttpContext.Current.Session[HttpContext.Current.User.Identity.GetUserId()] = null;
             HttpContext.Current.Session["total"] = null;
         }
 
