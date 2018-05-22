@@ -22,7 +22,9 @@ namespace GetFreshBooks.Controllers
         public ActionResult CheckOut()
         {
             BusinessLogic.CheckoutCart();
-            return View("Checkout");
+            Random rnd = new Random();
+            ViewBag.Invoice = rnd.Next(123456789, 987654321);
+            return View();
         }
     }
 }
