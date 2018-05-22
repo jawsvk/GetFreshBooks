@@ -10,11 +10,18 @@ namespace GetFreshBooks
     {
         Mybooks context = new Mybooks();
 
-        public List<Book> GetAll
+        public List<Book> GetAllBooks
         {
             get
             {
                 return context.Books.ToList<Book>();
+            }
+        }
+        public List<Book> GetAllCategories
+        {
+            get
+            {
+                return context.Categories.ToList<Category>();
             }
         }
     }
