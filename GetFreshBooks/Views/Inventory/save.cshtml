@@ -4,7 +4,7 @@
 @model GetFreshBooks.Models.Book
 
 
-<h2>Edit Details</h2>
+<h2>Book Details</h2>
 @using (Html.BeginForm("Save", "Inventory", FormMethod.Post, new { id = "popupForm" }))
 {
     if (Model != null && Model.BookID > 0)

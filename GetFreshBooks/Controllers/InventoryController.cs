@@ -31,11 +31,18 @@ namespace GetFreshBooks.Controllers
 
         public ActionResult save(int id)
         {
-            
+
+            if (id == 0 )
+            {
+                var v = new Book();
+                return View(v);
+            }
+            else
             {
                 var v = db.Books.Where(a => a.BookID == id).FirstOrDefault();
                 return View(v);
             }
+            
         }
         [HttpGet]
         public ActionResult delete(int id)
@@ -80,6 +87,7 @@ namespace GetFreshBooks.Controllers
                     else
                     {
                         //Save
+                        
                         db.Books.Add(book);
 
                     }
