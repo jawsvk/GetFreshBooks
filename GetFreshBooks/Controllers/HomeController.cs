@@ -10,9 +10,11 @@ namespace GetFreshBooks.Controllers
     {
         public ActionResult Index()
         {
+            ViewBag.Books = new BusinessLogic().GetAll;
             return View();
         }
 
+        [Authorize(Roles ="User,Admin")]
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
