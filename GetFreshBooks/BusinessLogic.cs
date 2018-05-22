@@ -10,11 +10,19 @@ namespace GetFreshBooks
     {
         static Mybooks context = new Mybooks(); 
 
-        public static List<Book> GetAll
+        public static List<Book> GetAllBooks
         {
             get
             {
                 return context.Books.ToList<Book>();
+            }
+        }
+
+        public static List<Category> GetAllCategories
+        {
+            get
+            {
+                return context.Categories.ToList<Category>();
             }
         }
 
@@ -86,12 +94,6 @@ namespace GetFreshBooks
             HttpContext.Current.Session["total"] = Convert.ToDouble(HttpContext.Current.Session["total"]) + price * quantity;
 
         }
-        public List<Book> GetAllCategories
-        {
-            get
-            {
-                return context.Categories.ToList<Category>();
-            }
-        }
+        
     }
 }

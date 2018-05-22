@@ -1,47 +1,47 @@
 ﻿@{
-    /**/
-
     ViewBag.Title = "Home Page";
     ViewBag.Roles = new List<string>();
 }
 
 @foreach (var cat in ViewBag.Categories)
-
-<div class="responsive">
-        <div>your content</div>
-        <div>your content</div>
-        <div>your content</div>
-</div>
-
-<div class="row">
-    @foreach (var book in ViewBag.Books)
-    {
-    <div class="col-md-2 col-xs-6 book mt-m">
-        <img class="book--img" src="~/images/@(book.ISBN).jpg" />
-        <div class="book--title">@book.Title</div>
-        <div class="book--author">@book.Author</div>
-        <div class="book--price">S$@book.Price</div>
-        @if (ViewBag.Roles.Contains("Admin"))
+{
+    <h3 class="mt-l mb-s">@String.Format("Books in \"{0}\"", cat.Name)</h3>
+    <div class="responsive">
+        @foreach (var book in ViewBag.Books)
         {
-            using (Html.BeginForm("Index", "Home", FormMethod.Post))
+            if (book.CategoryID == cat.CategoryID)
             {
-                <input type="hidden" name="isbn" value="@book.ISBN" />
-                <input type="submit" value="Add to Cart" class="fa fa-cart-plus" />
+                <div class="book--box pr-s">
+                    <img class="book--img" src="~/images/@(book.ISBN).jpg" />
+                    <h4 class="book--title">@book.Title</h4>
+                    <div class="book--author">@book.Author</div>
+                    <div class="book--price mb-xxs">S$@book.Price</div>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        using (Html.BeginForm("Index", "Home", FormMethod.Post))
+                        {
+                            <input type="hidden" name="isbn" value="@book.ISBN" />
+                            <button type="submit" class="btn btn-sm btn-default">
+                                <i class="fa fa-cart-plus"></i> Add To Cart
+                            </button>
+                        }
+                        @*<button type="button" class="btn btn-default"><i class="fa fa-cart-plus"></i> Add to Cart</button>*@
+                    }
+                </div>
             }
-            @*<button type="button" class="btn btn-default"><i class="fa fa-cart-plus"></i> Add to Cart</button>*@
         }
     </div>
-    }
-</div>
+}
 
 @section scripts {
-    <script src="~/Content/components/slick-carousel/slick/slick.min.js"></script>">
+    <script src="~/Content/components/slick-carousel/slick/slick.min.js"></script>
     <script>
         $('.responsive').slick({
             dots: true,
+            arrows: true,
             infinite: false,
             speed: 300,
-            slidesToShow: 4,
+            slidesToShow: 6,
             slidesToScroll: 4,
             responsive: [
                 {

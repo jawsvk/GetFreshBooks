@@ -1,10 +1,26 @@
-﻿.book--author {
+﻿.slick-prev:before {
+    color: black !important;
+}
+
+.slick-next:before {
+    color: black !important;
+}
+
+.book--box {
+    width: 180px;
+}
+
+.book--price {
+    font-weight: bold;
+}
+
+.book--author {
     height: 1.5em;
     overflow: hidden;
 }
 
 .book--title {
-    height: 3em;
+    height: 3.4em;
     overflow: hidden;
     font-weight: bold;
 }
