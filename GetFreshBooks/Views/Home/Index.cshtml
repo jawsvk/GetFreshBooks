@@ -2,7 +2,6 @@
     ViewBag.Title = "Home Page";
     ViewBag.Name = "Admin";
     ViewBag.Roles = new List<string>();
-    ViewBag.Roles.Add("Admin");
 }
 
 <div class="row">
@@ -13,7 +12,7 @@
             <div class="book--title">@book.Title</div>
             <div class="book--author">@book.Author</div>
             <div class="book--price">S$@book.Price</div>
-            @if (ViewBag.Roles.Contains("Admin")) {
+            @if (this.User.IsInRole("Admin")) {
                 <button type="button" class="btn btn-default"><i class="fa fa-cart-plus"></i> Add to Cart</button>
             }
         </div>
