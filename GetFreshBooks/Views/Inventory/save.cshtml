@@ -1,5 +1,4 @@
-﻿
-@using System.Linq
+﻿@using System.Linq
 @using GetFreshBooks.Models
 @model GetFreshBooks.Models.Book
 
@@ -14,7 +13,7 @@
 
     <div class="form-group">
         <label>Book ID</label>
-      <br />
+        <br />
         @Html.TextBoxFor(a => a.BookID, new { @readonly = "readonly" })
         @Html.ValidationMessageFor(a => a.BookID)
 
