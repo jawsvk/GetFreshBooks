@@ -1,5 +1,6 @@
 ﻿namespace GetFreshBooks.Models
 {
+    using GetFreshBooks.Helpers;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
@@ -16,11 +17,13 @@
         public string CustomerName { get; set; }
 
         [Required]
-        [StringLength(120)]
+        [EmailValidator(ErrorMessage = "Invalid Email Address")]
         public string Email { get; set; }
 
         [Required]
         [StringLength(4000, MinimumLength = 20)]
         public string MessageBody { get; set; }
+
+        public DateTime MessageDateTime { get; set; }
     }
 }
