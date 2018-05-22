@@ -69,7 +69,7 @@
                     },
                     {
                         "data": "BookID", "width": "50px", "orderable": false, "render": function (data) {
-                            return '<a class="popup btn btn-danger" href="/Inventory/Delete/'+data+'">Delete</a>';
+                            return '<a class="popup btn btn-danger" href="/Inventory/delete/'+data+'">Delete</a>';
                         }
                     }
                 ]
@@ -80,7 +80,6 @@
             $('.tablecontainer').on('click', 'a.popup', function (e) {
                 e.preventDefault();
                 OpenPopup($(this).attr('href'));
-                
             })
 
             function OpenPopup(pageUrl) {
@@ -98,7 +97,7 @@
                         draggable: false,
                         autoOpen: false,
                         resizable: false,
-                        modal: true,
+                        model: true,
                         height: 550,
                         width: 600,
                         close: function () {
@@ -116,7 +115,7 @@
                         data: $('#popupForm').serialize(),
                         success: function (data) {
                             if (data.status) {
-                                $dialog.dialog("instance").dialog("close");
+                                $dialog.dialog('close');
                                 oTable.ajax.reload();
                             }
                         }
