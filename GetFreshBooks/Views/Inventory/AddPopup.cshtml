@@ -1,0 +1,51 @@
+﻿
+@using System.Linq
+@using GetFreshBooks.Models
+@model GetFreshBooks.Models.Book
+
+
+<div class="modal fade" id="MyModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a href="#" class="close" data-dismiss="modal">&times;</a>
+                <h4 id="ModalTitle"></h4>
+
+            </div>
+            <div class="modal-body">
+                <form id="form">
+                    <fieldset id="SubmitForm">
+                        <div class=" form-group">
+                            @Html.TextBoxFor(m => m.BookID, new { @id = "BookID", @class = "form-control", @placeholder = "BookID*" })
+                        </div>
+                        <div class=" form-group">
+                            @Html.TextBoxFor(m => m.Title, new { @id = "Title", @class = "form-control", @placeholder = "Title*" })
+                        </div>
+                        <div class=" form-group">
+                            @Html.TextBoxFor(m => m.Author, new { @id = "Author", @class = "form-control", @placeholder = "Author*" })
+                        </div>
+                        <div class=" form-group">
+                            @Html.TextBoxFor(m => m.CategoryID, new { @id = "CategoryID", @class = "form-control", @placeholder = "CategoryID*" })
+                        </div>
+                        <div class=" form-group">
+                            @Html.TextBoxFor(m => m.ISBN, new { @id = "ISBN", @class = "form-control", @placeholder = "ISBN*" })
+                        </div>
+                        <div class=" form-group">
+                            @Html.TextBoxFor(m => m.Stock, new { @id = "Stock", @class = "form-control", @placeholder = "Stock*" })
+                        </div>
+                        <div class=" form-group">
+                            @Html.TextBoxFor(m => m.Price, new { @id = "Price", @class = "form-control", @placeholder = "Price*" })
+                        </div>
+                        <div class=" form-group">
+                            <div>
+                                <input type="submit" value="Save" />
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,43 @@
+﻿@model GetFreshBooks.Models.Book
+
+
+<h2>Delete Book</h2>
+@using (Html.BeginForm("delete", "Inventory", FormMethod.Post, new { id = "popupForm" }))
+{
+    @Html.HiddenFor(a => a.BookID)
+    <div class="form-group">
+        <label>Book ID</label>
+        <p>@Model.BookID</p>
+    </div>
+
+    <div class="form-group">
+        <label>Book Title</label>
+        <p>@Model.Title</p>
+    </div>
+
+    <div class="form-group">
+        <label>Category ID</label>
+        <p>@Model.CategoryID</p>
+    </div>
+
+    <div class="form-group">
+        <label>ISBN</label>
+        <p>@Model.ISBN</p>
+    </div>
+
+    <div class="form-group">
+        <label>Book Author</label>
+        <p>@Model.Author</p>
+    </div>
+    <div class="form-group">
+        <label>Stock</label>
+        <p>@Model.Stock</p>
+    </div>
+    <div class="form-group">
+        <label>Price</label>
+        <p>@Model.Price</p>
+    </div>
+    <div>
+        <input type="submit" value="Delete" />
+    </div>
+}
