@@ -8,14 +8,20 @@
 <div class="row">
     @foreach (var book in ViewBag.Books)
     {
-        <div class="col-md-2 col-xs-6 book mt-m">
-            <img class="book--img" src="~/images/@(book.ISBN).jpg" />
-            <div class="book--title">@book.Title</div>
-            <div class="book--author">@book.Author</div>
-            <div class="book--price">S$@book.Price</div>
-            @if (ViewBag.Roles.Contains("Admin")) {
-                <button type="button" class="btn btn-default"><i class="fa fa-cart-plus"></i> Add to Cart</button>
+    <div class="col-md-2 col-xs-6 book mt-m">
+        <img class="book--img" src="~/images/@(book.ISBN).jpg" />
+        <div class="book--title">@book.Title</div>
+        <div class="book--author">@book.Author</div>
+        <div class="book--price">S$@book.Price</div>
+        @if (ViewBag.Roles.Contains("Admin"))
+        {
+            using (Html.BeginForm("Index", "Home", FormMethod.Post))
+            {
+                <input type="hidden" name="isbn" value="@book.ISBN" />
+                <input type="submit" value="Add to Cart" class="fa fa-cart-plus" />
             }
-        </div>
+            @*<button type="button" class="btn btn-default"><i class="fa fa-cart-plus"></i> Add to Cart</button>*@
+        }
+    </div>
     }
 </div>

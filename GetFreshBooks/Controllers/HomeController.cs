@@ -10,8 +10,16 @@ namespace GetFreshBooks.Controllers
     {
         public ActionResult Index()
         {
-            ViewBag.Books = new BusinessLogic().GetAll;
+            ViewBag.Books = BusinessLogic.GetAll;
             return View();
+        }
+        [HttpPost]
+        public ActionResult Index(string isbn)
+        {
+            System.Diagnostics.Debug.WriteLine(isbn);
+            BusinessLogic.AddToCart(isbn);
+            ViewBag.Books = BusinessLogic.GetAll;
+            return View("Index");         
         }
 
         [Authorize(Roles ="User,Admin")]
