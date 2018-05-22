@@ -391,7 +391,6 @@
     <Content Include="Views\Inventory\save.cshtml" />
     <Content Include="Views\Inventory\delete.cshtml" />
     <Content Include="Views\Cart\CheckOut.cshtml" />
-    <Content Include="Views\Inventory\AddPopup.cshtml" />
     <Content Include="Views\Message\Index.cshtml" />
     <Content Include="Views\Cart\Index.cshtml" />
   </ItemGroup>
