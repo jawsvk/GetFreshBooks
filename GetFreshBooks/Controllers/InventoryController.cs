@@ -7,7 +7,7 @@ using System.Web.Mvc;
 namespace GetFreshBooks.Controllers
 {
     using Models;
-   
+
 
     public class InventoryController : Controller
     {
@@ -15,18 +15,15 @@ namespace GetFreshBooks.Controllers
         // GET: Inventory
         public ActionResult Index()
         {
-           
+
             return View();
         }
 
-        public ActionResult loaddata()
+        public ActionResult LoadData()
         {
-          
-            {
-                db.Configuration.LazyLoadingEnabled = false; // if your table is relational, contain foreign key
-                var data = db.Books.OrderBy(a => a.BookID).ToList();
-                return Json(new { data = data }, JsonRequestBehavior.AllowGet);
-            }
+            db.Configuration.LazyLoadingEnabled = false; // if your table is relational, contain foreign key
+            var data = db.Books.OrderBy(a => a.BookID).ToList();
+            return Json(new { data }, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult save(int id)
@@ -43,76 +40,70 @@ namespace GetFreshBooks.Controllers
             }
         }
         [HttpGet]
-        public ActionResult delete(int id)
+        public ActionResult Delete(int id)
         {
-            
+            var v = db.Books.Where(a => a.BookID == id).FirstOrDefault();
+            if (v != null)
             {
-                var v = db.Books.Where(a => a.BookID == id).FirstOrDefault();
-                if (v != null)
-                {
-                    return View(v);
-                }
-                else
-                {
-                    return HttpNotFound();
-                }
+                return View(v);
+            }
+            else
+            {
+                return HttpNotFound();
             }
         }
+
         [HttpPost]
         public ActionResult Save(Book book)
         {
             bool status = false;
             if (ModelState.IsValid)
             {
-               
+                if (book.BookID > 0)
                 {
-                    if (book.BookID > 0)
+                    //Edit 
+                    var v = db.Books.Where(a => a.BookID == book.BookID).FirstOrDefault();
+                    if (v != null)
                     {
-                        //Edit 
-                        var v = db.Books.Where(a => a.BookID == book.BookID).FirstOrDefault();
-                        if (v != null)
-                        {
-                            v.BookID = book.BookID;
-                            v.Title = book.Title;
-                            v.CategoryID = book.CategoryID;
-                            v.ISBN = book.ISBN;
-                            v.Author = book.Author;
-                            v.Stock = book.Stock;
-                            v.Price = book.Price;
-
-                        }
-                    }
-                    else
-                    {
-                        //Save
-                        db.Books.Add(book);
+                        v.BookID = book.BookID;
+                        v.Title = book.Title;
+                        v.CategoryID = book.CategoryID;
+                        v.ISBN = book.ISBN;
+                        v.Author = book.Author;
+                        v.Stock = book.Stock;
+                        v.Price = book.Price;
 
                     }
-                    db.SaveChanges();
-                    status = true;
                 }
+                else
+                {
+                    //Save
+                    db.Books.Add(book);
+
+                }
+                db.SaveChanges();
+                status = true;
             }
-            return new JsonResult { Data = new { status = status } };
+            return new JsonResult { Data = new { status } };
         }
 
         [HttpPost]
-        [ActionName("delete")]
+        [ActionName("Delete")]
         public ActionResult DeleteBook(int id)
         {
             bool status = false;
-           
+
+            var v = db.Books.Where(a => a.BookID == id).FirstOrDefault();
+            if (v != null)
             {
-                var v = db.Books.Where(a => a.BookID == id).FirstOrDefault();
-                if (v != null)
-                {
-                    db.Books.Remove(v);
-                    db.SaveChanges();
-                    status = true;
-                }
+                db.Books.Remove(v);
+                db.SaveChanges();
+                status = true;
             }
-            return new JsonResult { Data = new { status = status } };
+
+            return new JsonResult { Data = new { status } };
         }
     }
 
-   
+
 }
