@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Microsoft.AspNet.Identity;
 
 namespace GetFreshBooks
 {
     using GetFreshBooks.Models;
     public static class BusinessLogic
     {
-        static Mybooks context = new Mybooks(); 
+        static Mybooks context = new Mybooks();
 
         public static List<Book> GetAllBooks
         {
@@ -28,13 +29,14 @@ namespace GetFreshBooks
 
         public static void AddToCart(string isbn)
         {
-            if (HttpContext.Current.Session["items"] == null)
+            if (HttpContext.Current.Session[HttpContext.Current.User.Identity.GetUserId()] == null)
             {
-                HttpContext.Current.Session["items"] = new List<CartBook>();
+                HttpContext.Current.Session[HttpContext.Current.User.Identity.GetUserId()] = new List<CartBook>();
                 HttpContext.Current.Session["total"] = 0;
+                
             }
 
-            List<CartBook> cBookList = (List<CartBook>)HttpContext.Current.Session["items"];
+            List<CartBook> cBookList = (List<CartBook>)HttpContext.Current.Session[HttpContext.Current.User.Identity.GetUserId()];
 
             bool found = false;
 
@@ -44,7 +46,7 @@ namespace GetFreshBooks
                 {
                     c.Quantity++;
                     found = true;
-                    CalculatePrice(c.Price, 1);
+                    CalculatePrice(c.Price);
                     break;
                 }
             }
@@ -55,43 +57,46 @@ namespace GetFreshBooks
                 Book book = query.First();
                 CartBook cbook = new CartBook(book.ISBN, book.Title, book.Author, (double)book.Price);
                 cBookList.Add(cbook);
-                CalculatePrice(cbook.Price, 1);
+                CalculatePrice(cbook.Price);
 
             }
 
-            HttpContext.Current.Session["items"] = cBookList;
+            HttpContext.Current.Session[HttpContext.Current.User.Identity.GetUserId()] = cBookList;
 
         }
 
         public static void DeleteFromCart(string isbn)
         {
 
-            List<CartBook> cBookList = (List<CartBook>)HttpContext.Current.Session["items"];
-            foreach (CartBook c in cBookList)
-            {
-                if (c.Isbn == isbn)
-                {
-                    cBookList.Remove(c);
-                    HttpContext.Current.Session["total"] = (double)HttpContext.Current.Session["total"] - (c.Price * c.Quantity);
+            List<CartBook> cBookList = (List<CartBook>)HttpContext.Current.Session[HttpContext.Current.User.Identity.GetUserId()];
 
-                    break;
+           
+                foreach (CartBook c in cBookList)
+                {
+                    if (c.Isbn == isbn)
+                    {
+                        cBookList.Remove(c);
+                        HttpContext.Current.Session["total"] = ((double)HttpContext.Current.Session["total"] - (c.Price * c.Quantity)) - 0 < 0.00 ? 0 : ((double)HttpContext.Current.Session["total"] - (c.Price * c.Quantity));
+
+                        break;
+                    }
+
                 }
 
-            }
-
-            HttpContext.Current.Session["items"] = cBookList;
-
+                HttpContext.Current.Session[HttpContext.Current.User.Identity.GetUserId()] = cBookList;
+            
+            
         }
 
         public static void CheckoutCart()
         {
-            HttpContext.Current.Session["items"] = null;
+            HttpContext.Current.Session[HttpContext.Current.User.Identity.GetUserId()] = null;
             HttpContext.Current.Session["total"] = null;
         }
 
-        public static void CalculatePrice(double price, int quantity)
+        public static void CalculatePrice(double price)
         {
-            HttpContext.Current.Session["total"] = Convert.ToDouble(HttpContext.Current.Session["total"]) + price * quantity;
+            HttpContext.Current.Session["total"] = Convert.ToDouble(HttpContext.Current.Session["total"]) + price;
 
         }
         
