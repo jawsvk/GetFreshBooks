@@ -27,7 +27,9 @@ namespace GetFreshBooks
                       "~/Content/bootstrap.css",
                       "~/Content/site.css",
                       "~/Content/font-awesome.css",
-                      "~/Content/components/css-spaces/dist/spaces.css"));
+                      "~/Content/components/css-spaces/dist/spaces.css",
+                      "~/Content/components/slick-carousel/slick/slick.css",
+                      "~/Content/components/slick-carousel/slick/slick-theme.css"));
         }
     }
 }

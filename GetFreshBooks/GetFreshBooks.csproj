@@ -46,6 +46,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.8.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
@@ -104,6 +110,12 @@
     <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebActivatorEx.2.0\lib\net40\WebActivatorEx.dll</HintPath>
     </Reference>
     <Reference Include="WebGrease">
       <Private>True</Private>
@@ -192,36 +204,145 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="BusinessLogic.cs" />
+    <Compile Include="CartBook.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\InventoryController.cs" />
+    <Compile Include="Controllers\MessageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\EmailValidator.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Book.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Message.cs" />
     <Compile Include="Models\Mybooks.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="bin\GetFreshBooks.dll" />
+    <Content Include="bin\GetFreshBooks.pdb" />
+    <Content Include="Content\components\css-spaces\dist\spaces.bootstrap.css" />
+    <Content Include="Content\components\css-spaces\dist\spaces.bootstrap.min.css" />
+    <Content Include="Content\components\css-spaces\dist\spaces.css" />
+    <Content Include="Content\components\css-spaces\dist\spaces.min.css" />
+    <Content Include="Content\components\css-spaces\gulpfile.js" />
+    <Content Include="Content\components\slick-carousel\slick\ajax-loader.gif" />
+    <Content Include="Content\components\slick-carousel\slick\fonts\slick.svg" />
+    <Content Include="Content\components\slick-carousel\slick\slick-theme.css" />
+    <Content Include="Content\components\slick-carousel\slick\slick.css" />
+    <Content Include="Content\components\slick-carousel\slick\slick.js" />
+    <Content Include="Content\components\slick-carousel\slick\slick.min.js" />
+    <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\font-awesome.min.css" />
     <Content Include="favicon.ico" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="images\9780060555665.jpg" />
+    <Content Include="images\9780062377210.jpg" />
+    <Content Include="images\9780062390851.jpg" />
+    <Content Include="images\9780062498533.jpg" />
+    <Content Include="images\9780262035613.jpg" />
+    <Content Include="images\9780307279187.jpg" />
+    <Content Include="images\9780316468978.jpg" />
+    <Content Include="images\9780374300210.jpg" />
+    <Content Include="images\9780385376716.jpg" />
+    <Content Include="images\9780385537353.jpg" />
+    <Content Include="images\9780399255373.jpg" />
+    <Content Include="images\9780399588174.jpg" />
+    <Content Include="images\9780425285176.jpg" />
+    <Content Include="images\9780544633384.jpg" />
+    <Content Include="images\9780691135144.jpg" />
+    <Content Include="images\9780691169019.jpg" />
+    <Content Include="images\9780735214149.jpg" />
+    <Content Include="images\9780744017311.jpg" />
+    <Content Include="images\9780803741713.jpg" />
+    <Content Include="images\9780812988406.jpg" />
+    <Content Include="images\9780812995800.jpg" />
+    <Content Include="images\9780812996937.jpg" />
+    <Content Include="images\9780984782857.jpg" />
+    <Content Include="images\9780997584714.jpg" />
+    <Content Include="images\9781101875681.jpg" />
+    <Content Include="images\9781101904404.jpg" />
+    <Content Include="images\9781119144755.jpg" />
+    <Content Include="images\9781119259756.jpg" />
+    <Content Include="images\9781259589515.jpg" />
+    <Content Include="images\9781419721373.jpg" />
+    <Content Include="images\9781442468405.jpg" />
+    <Content Include="images\9781476763828.jpg" />
+    <Content Include="images\9781484732748.jpg" />
+    <Content Include="images\9781484746424.jpg" />
+    <Content Include="images\9781491962299.jpg" />
+    <Content Include="images\9781497644892.jpg" />
+    <Content Include="images\9781501163807.jpg" />
+    <Content Include="images\9781506703350.jpg" />
+    <Content Include="images\9781506703671.jpg" />
+    <Content Include="images\9781506705408.jpg" />
+    <Content Include="images\9781524766498.jpg" />
+    <Content Include="images\9781535585958.jpg" />
+    <Content Include="images\9781589795471.jpg" />
+    <Content Include="images\9781593276034.jpg" />
+    <Content Include="images\9781616205676.jpg" />
+    <Content Include="images\9781619634480.jpg" />
+    <Content Include="images\9781911015222.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="Content\components\css-spaces\.bower.json" />
+    <Content Include="Content\components\css-spaces\bower.json" />
+    <Content Include="Content\components\css-spaces\LICENSE" />
+    <Content Include="Content\components\css-spaces\package.json" />
+    <Content Include="Content\components\css-spaces\README.md" />
+    <Content Include="Content\components\css-spaces\source\spaces.bootstrap.scss" />
+    <Content Include="Content\components\css-spaces\source\spaces.scss" />
+    <Content Include="Content\components\css-spaces\source\_margins.scss" />
+    <Content Include="Content\components\css-spaces\source\_paddings.scss" />
+    <Content Include="Content\components\css-spaces\source\_settings.bootstrap.scss" />
+    <Content Include="Content\components\css-spaces\source\_settings.scss" />
+    <Content Include="Content\components\css-spaces\source\_widths.scss" />
+    <Content Include="Content\components\slick-carousel\.bower.json" />
+    <Content Include="Content\components\slick-carousel\bower.json" />
+    <Content Include="Content\components\slick-carousel\component.json" />
+    <Content Include="Content\components\slick-carousel\CONTRIBUTING.markdown" />
+    <Content Include="Content\components\slick-carousel\ISSUE_TEMPLATE.md" />
+    <Content Include="Content\components\slick-carousel\LICENSE" />
+    <Content Include="Content\components\slick-carousel\Makefile" />
+    <Content Include="Content\components\slick-carousel\README.markdown" />
+    <Content Include="Content\components\slick-carousel\slick.jquery.json" />
+    <Content Include="Content\components\slick-carousel\slick\config.rb" />
+    <Content Include="Content\components\slick-carousel\slick\fonts\slick.eot" />
+    <Content Include="Content\components\slick-carousel\slick\fonts\slick.ttf" />
+    <Content Include="Content\components\slick-carousel\slick\fonts\slick.woff" />
+    <Content Include="Content\components\slick-carousel\slick\slick-theme.less" />
+    <Content Include="Content\components\slick-carousel\slick\slick-theme.scss" />
+    <Content Include="Content\components\slick-carousel\slick\slick.less" />
+    <Content Include="Content\components\slick-carousel\slick\slick.scss" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
-    <Content Include="Scripts\jquery-1.10.2.js" />
-    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\jquery-3.3.1.js" />
+    <Content Include="Scripts\jquery-3.3.1.min.js" />
+    <Content Include="Scripts\jquery-3.3.1.slim.js" />
+    <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
+    <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.3.1.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
@@ -244,7 +365,6 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
@@ -266,6 +386,12 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Inventory\Index.cshtml" />
+    <Content Include="Views\Inventory\Save.cshtml" />
+    <Content Include="Views\Inventory\AddPopup.cshtml" />
+    <Content Include="Views\Inventory\Delete.cshtml" />
+    <Content Include="Views\Message\Index.cshtml" />
+    <Content Include="Views\Cart\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -281,7 +407,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -297,7 +425,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>58895</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

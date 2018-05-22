@@ -1,0 +1,77 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Cart</h2>
+
+<br />
+<hr />
+
+
+@{
+
+    List<CartBook> cart = (List<CartBook>)System.Web.HttpContext.Current.Session["items"];
+
+    <div class="container">
+
+        @if (cart != null)
+        {
+            ViewBag.totalPrice = 0;
+            <div class="row">
+
+                <div class="row col-md-8">
+
+                    @foreach (var cb in cart)
+                    {
+
+                        <div class="row">
+                            <div class="col-md-4 col-sm-12">
+                                <img src="~/images/@(cb.Isbn).jpg" class="img-thumbnail.max-width: 100%">
+                            </div>
+                            <div class="col-md-4 col-sm-12">
+                                <div>ISBN: @cb.Isbn</div><br />
+                                <div>@cb.BookName</div><br />
+                                <div>@cb.Author</div><br />
+                                <div>@cb.Price</div><br />
+                                <div> Quantity: @cb.Quantity  </div>
+
+                                <br />
+                            </div>
+                            <div class="col-md-4 col-sm-12">
+                                @using (Html.BeginForm("Delete", "Cart", FormMethod.Post))
+                                {
+                                    <input type="hidden" name="isbn" value="@cb.Isbn" />
+                                    <input type="submit" value="Delete" class="btn-danger btn-small" />
+                                }
+                            </div>
+                        </div>
+                        <hr />
+
+
+
+
+                    }
+
+                </div>
+
+                <div class="col-md-4">
+                    <div class="col-md-4 col-sm-12">
+                        @using (Html.BeginForm("Checkout", "Cart", FormMethod.Post))
+                        {
+                            <input type="submit" value="Checkout" class="btn-danger btn-small" />
+                        }
+                    </div>
+                    <div>
+                        <p>Total Price: @System.Web.HttpContext.Current.Session["total"]</p>
+                    </div>
+
+                </div>
+            </div>
+
+
+        }
+    </div>
+
+
+}

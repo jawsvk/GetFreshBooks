@@ -10,21 +10,24 @@ namespace GetFreshBooks.Controllers
     {
         public ActionResult Index()
         {
-            ViewBag.Books = new BusinessLogic().GetAll;
+            ViewBag.Categories = BusinessLogic.GetAllCategories;
+            ViewBag.Books = BusinessLogic.GetAllBooks;
             return View();
         }
+        [HttpPost]
+        public ActionResult Index(string isbn)
+        {
+            System.Diagnostics.Debug.WriteLine(isbn);
+            BusinessLogic.AddToCart(isbn);
+            ViewBag.Categories = BusinessLogic.GetAllCategories;
+            ViewBag.Books = BusinessLogic.GetAllBooks;
+            return View("Index");         
+        }
 
-        [Authorize(Roles ="User,Admin")]
+        // [Authorize(Roles ="User,Admin")]
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "GetFreshBooks";
 
             return View();
         }
