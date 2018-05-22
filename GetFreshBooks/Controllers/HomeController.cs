@@ -10,6 +10,7 @@ namespace GetFreshBooks.Controllers
     {
         public ActionResult Index()
         {
+            ViewBag.Books = new BusinessLogic().GetAll;
             return View();
         }
 
