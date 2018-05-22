@@ -3,18 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using GetFreshBooks.Models;
 
 namespace GetFreshBooks.Controllers
 {
+    using Models;
+   
 
     public class InventoryController : Controller
     {
         Mybooks db = new Mybooks();
-
         // GET: Inventory
         public ActionResult Index()
         {
+           
             return View();
         }
 
