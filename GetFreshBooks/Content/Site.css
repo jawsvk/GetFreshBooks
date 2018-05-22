@@ -1,4 +1,8 @@
-﻿.slick-prev:before {
+﻿.price--label {
+    font-style: bold;
+}
+
+.slick-prev:before {
     color: black !important;
 }
 
