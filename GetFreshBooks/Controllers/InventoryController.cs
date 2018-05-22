@@ -11,7 +11,7 @@ namespace GetFreshBooks.Controllers
 
     public class InventoryController : Controller
     {
-        BookshopEntities db = new BookshopEntities();
+        Mybooks db = new Mybooks();
         // GET: Inventory
         public ActionResult Index()
         {
