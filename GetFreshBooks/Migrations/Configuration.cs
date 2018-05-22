@@ -10,6 +10,7 @@ namespace GetFreshBooks.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
+            ContextKey = "GetFreshBooks.Models.ApplicationDbContext";
         }
 
         protected override void Seed(GetFreshBooks.Models.ApplicationDbContext context)
