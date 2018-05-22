@@ -38,6 +38,7 @@ namespace GetFreshBooks.Controllers
                 var v = db.Books.Where(a => a.BookID == id).FirstOrDefault();
                 return View(v);
             }
+            
         }
         [HttpGet]
         public ActionResult Delete(int id)
@@ -73,12 +74,12 @@ namespace GetFreshBooks.Controllers
                         v.Stock = book.Stock;
                         v.Price = book.Price;
 
+                        }
                     }
-                }
-                else
-                {
-                    //Save
-                    db.Books.Add(book);
+                    else
+                    {
+                        //Save
+                        db.Books.Add(book);
 
                 }
                 db.SaveChanges();
