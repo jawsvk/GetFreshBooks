@@ -1,7 +1,7 @@
 ﻿@model GetFreshBooks.Models.Book
 
 
-<h2>Delete Book</h2>
+<h2><i>Are you sure you want to delete?</i></h2>
 @using (Html.BeginForm("delete", "Inventory", FormMethod.Post, new { id = "popupForm" }))
 {
     @Html.HiddenFor(a => a.BookID)
