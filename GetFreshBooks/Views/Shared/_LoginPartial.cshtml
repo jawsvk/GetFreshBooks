@@ -15,7 +15,7 @@
             <li class="dropdown">
                 <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">@User.Identity.GetUserName() <span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                    <li><a href="javascript:void(0)">Manage Inventory</a></li>
+                    <li>@Html.ActionLink("Manage Inventory", "Index", "Inventory")</li>
                     <li role="separator" class="divider"></li>
                     <li><a href="javascript:document.getElementById('logoutForm').submit()">Sign Out</a></li>
                 </ul>

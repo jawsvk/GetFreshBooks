@@ -26,10 +26,18 @@ namespace GetFreshBooks.Controllers
             return Json(new { data }, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult Save(int id)
+        public ActionResult save(int id)
         {
-            var v = db.Books.Where(a => a.BookID == id).FirstOrDefault();
-            return View(v);
+            if(id==0)
+            {
+                var v = new Book();
+                return View(v);
+            }
+            else
+            {
+                var v = db.Books.Where(a => a.BookID == id).FirstOrDefault();
+                return View(v);
+            }
         }
         [HttpGet]
         public ActionResult Delete(int id)
