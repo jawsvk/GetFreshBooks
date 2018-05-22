@@ -10,7 +10,8 @@ namespace GetFreshBooks.Controllers
     {
         public ActionResult Index()
         {
-            ViewBag.Books = BusinessLogic.GetAll;
+            ViewBag.Categories = BusinessLogic.GetAllCategories;
+            ViewBag.Books = BusinessLogic.GetAllBooks;
             return View();
         }
         [HttpPost]
@@ -18,7 +19,8 @@ namespace GetFreshBooks.Controllers
         {
             System.Diagnostics.Debug.WriteLine(isbn);
             BusinessLogic.AddToCart(isbn);
-            ViewBag.Books = BusinessLogic.GetAll;
+            ViewBag.Categories = BusinessLogic.GetAllCategories;
+            ViewBag.Books = BusinessLogic.GetAllBooks;
             return View("Index");         
         }
 
