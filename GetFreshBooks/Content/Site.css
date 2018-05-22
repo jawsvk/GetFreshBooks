@@ -1,4 +1,9 @@
-﻿.slick-prev:before {
+﻿
+.tablecontainer span.field-validation-error {
+    color: red;
+}
+
+.slick-prev:before {
     color: black !important;
 }
 
