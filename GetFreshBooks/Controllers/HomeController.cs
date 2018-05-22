@@ -24,17 +24,10 @@ namespace GetFreshBooks.Controllers
             return View("Index");         
         }
 
-        [Authorize(Roles ="User,Admin")]
+        // [Authorize(Roles ="User,Admin")]
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "GetFreshBooks";
 
             return View();
         }

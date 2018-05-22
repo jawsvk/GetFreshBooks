@@ -1,0 +1,55 @@
+﻿
+@using System.Linq
+@using GetFreshBooks.Models
+@model GetFreshBooks.Models.Book
+
+
+<h2>Edit Details</h2>
+@using (Html.BeginForm("Save", "Inventory", FormMethod.Post, new { id = "popupForm" }))
+{
+    if (Model != null && Model.BookID > 0)
+    {
+        @Html.HiddenFor(a => a.BookID)
+    }
+
+    <div class="form-group">
+        <label>Book ID</label>
+      <br />
+        @Html.TextBoxFor(a => a.BookID, new { @readonly = "readonly" })
+        @Html.ValidationMessageFor(a => a.BookID)
+
+    </div>
+    <div class="form-group">
+        <label>Book Title</label>
+        @Html.TextBoxFor(a => a.Title, new { @class = "form-control" })
+        @Html.ValidationMessageFor(a => a.Title)
+    </div>
+    <div class="form-group">
+        <label>Category ID</label>
+        @Html.TextBoxFor(a => a.CategoryID, new { @class = "form-control" })
+        @Html.ValidationMessageFor(a => a.CategoryID)
+    </div>
+    <div class="form-group">
+        <label>ISBN</label>
+        @Html.TextBoxFor(a => a.ISBN, new { @class = "form-control" })
+        @Html.ValidationMessageFor(a => a.ISBN)
+    </div>
+    <div class="form-group">
+        <label>Book Author</label>
+        @Html.TextBoxFor(a => a.Author, new { @class = "form-control" })
+        @Html.ValidationMessageFor(a => a.Author)
+    </div>
+    <div class="form-group">
+        <label>Stock</label>
+        @Html.TextBoxFor(a => a.Stock, new { @class = "form-control" })
+        @Html.ValidationMessageFor(a => a.Stock)
+    </div>
+    <div class="form-group">
+        <label>Book Price</label>
+        @Html.TextBoxFor(a => a.Price, new { @class = "form-control" })
+        @Html.ValidationMessageFor(a => a.Price)
+    </div>
+    <div>
+        <input type="submit" value="Save" />
+    </div>
+}
