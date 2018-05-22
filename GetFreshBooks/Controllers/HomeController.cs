@@ -14,7 +14,7 @@ namespace GetFreshBooks.Controllers
             return View();
         }
 
-        [Authorize(Roles ="User,Admin")]
+        // [Authorize(Roles ="User,Admin")]
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
