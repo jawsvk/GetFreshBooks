@@ -37,7 +37,6 @@
 
                 </tr>
             </thead>
-
         </table>
     </div>
     <script src="~/Scripts/jquery-3.3.1.min.js"></script>
@@ -102,9 +101,9 @@
                         modal: true,
                         height: 550,
                         width: 600,
-                        close: function (event,ui) {
-                            $dialog.dialog("close");
-                            
+                        close: function () {
+                            $dialog.dialog('destroy').remove();
+                            window.location.reload();
                         }
                     })
 
@@ -133,7 +132,6 @@
         })
 
     </script>
-
 </body>
 </html>
 
