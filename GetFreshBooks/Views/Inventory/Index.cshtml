@@ -1,29 +1,67 @@
 ﻿
 @{
-    ViewBag.Title = "InventoryView";
+
 }
-@using MVCGrid.Web
-@using System.Linq
-@using GetFreshBooks.Models
-@using MVCGrid.Models
-@model GetFreshBooks.Models.Book
 
 <h2>Inventory Management</h2>
-<br />
-<br />
 
-<a href="#" class="btn btn-info" onclick="AddNewBook(0)">Add New Book</a>
+@* Load datatable css *@
+<link href="//cdn.datatables.net/1.10.9/css/jquery.dataTables.min.css" rel="stylesheet" />
 
-@Html.MVCGrid("Inventory")
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<div class="container" style="margin-top:3%">
+    <a href="#" class="btn btn-info" onclick="AddNewBook(0)">Add New Book</a> <br /><br />
+    <table id="myTable">
+        <thead>
+            <tr>
+                <th>Book ID</th>
+                <th>Title</th>
+                <th>Category ID</th>
+                <th>ISBN</th>
+                <th>Author</th>
+                <th>Stock</th>
+                <th>Price</th>
 
-@Html.Partial("~/Views/Shared/AddPopup.cshtml")
+            </tr>
+        </thead>
 
+    </table>
+</div>
+<style>
+    tr.even {
+        background-color: #F5F5F5 !important;
+    }
+</style>
+@section Scripts{
+<script src="//cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>
+    <script>
+            $(document).ready(function () {
+            $('#myTable').DataTable({
+                "ajax": {
+                    "url": "/Inventory/loaddata",
+                    "type": "GET",
+                    "datatype": "json"
+                },
+                "columns": [
+                    { "data": "BookID", "autoWidth": true },
+                    { "data": "Title", "autoWidth": true },
+                    { "data": "CategoryID", "autoWidth": true },
+                    { "data": "ISBN", "autoWidth": true },
+                    { "data": "Author", "autoWidth": true },
+                    { "data": "Stock", "autoWidth": true },
+                    { "data": "Price", "autoWidth": true }
 
-<script>
+                ]
+            });
+        });
+
     function AddNewBook(BookID) {
-        $("#form")[0].reset();
+            $("#form")[0].reset();
         $("#ModalTitle").html("Add New Book");
         $("#MyModal").modal();
     }
-</script>
 
+</script>
+    }
+@Html.Partial("~/Views/Shared/AddPopup.cshtml")

@@ -11,18 +11,23 @@ namespace GetFreshBooks.Controllers
 
     public class InventoryController : Controller
     {
-        BookshopEntities context = new BookshopEntities();
+        BookshopEntities db = new BookshopEntities();
         // GET: Inventory
         public ActionResult Index()
         {
            
             return View();
         }
-
-        public ActionResult Detail(string id)
+        public ActionResult loaddata()
         {
-            int x = Convert.ToInt32(id);
-            return PartialView(@"~/Views/Shared/_EditPopup.cshtml", context.Books.Where(p => p.BookID == x).First());
+          
+            {
+                db.Configuration.LazyLoadingEnabled = false; // if your table is relational, contain foreign key
+                var data = db.Books.OrderBy(a => a.BookID).ToList();
+                return Json(new { data = data }, JsonRequestBehavior.AllowGet);
+            }
         }
+
+        
     }
 }
