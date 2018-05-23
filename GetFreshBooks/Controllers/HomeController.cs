@@ -15,7 +15,7 @@ namespace GetFreshBooks.Controllers
             if (System.Web.HttpContext.Current.Session[System.Web.HttpContext.Current.User.Identity.GetUserId()] == null)
             {
                 System.Web.HttpContext.Current.Session[System.Web.HttpContext.Current.User.Identity.GetUserId()] = new List<CartBook>();
-                System.Web.HttpContext.Current.Session["total"] = 0;
+                System.Web.HttpContext.Current.Session["total"+ System.Web.HttpContext.Current.User.Identity.GetUserId()] = 0;
 
             }
 

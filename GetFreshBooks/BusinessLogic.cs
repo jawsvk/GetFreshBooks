@@ -68,7 +68,8 @@ namespace GetFreshBooks
                 if (c.Isbn == isbn)
                 {
                     cBookList.Remove(c);
-                    HttpContext.Current.Session["total"] = ((double)HttpContext.Current.Session["total"] - (c.Price * c.Quantity)) - 0 < 0.00 ? 0 : ((double)HttpContext.Current.Session["total"] - (c.Price * c.Quantity));
+                    HttpContext.Current.Session["total"+ HttpContext.Current.User.Identity.GetUserId()] = 
+                        ((double)(HttpContext.Current.Session["total"+ HttpContext.Current.User.Identity.GetUserId()]) - (c.Price * c.Quantity)) - 0 < 0.00 ? 0 : ((double)HttpContext.Current.Session["total"+ HttpContext.Current.User.Identity.GetUserId()] - (c.Price * c.Quantity));
                 
                     break;
                 }
@@ -80,12 +81,12 @@ namespace GetFreshBooks
         public static void CheckoutCart()
         {
             HttpContext.Current.Session[HttpContext.Current.User.Identity.GetUserId()] = new List<CartBook>();
-            HttpContext.Current.Session["total"] = 0;
+            HttpContext.Current.Session["total"+ HttpContext.Current.User.Identity.GetUserId()] = 0;
         }
 
         public static void CalculatePrice(double price)
         {
-            HttpContext.Current.Session["total"] = Convert.ToDouble(HttpContext.Current.Session["total"]) + price;
+            HttpContext.Current.Session["total"+ HttpContext.Current.User.Identity.GetUserId()] = Convert.ToDouble(HttpContext.Current.Session["total"+ HttpContext.Current.User.Identity.GetUserId()]) + price;
 
         }
         
