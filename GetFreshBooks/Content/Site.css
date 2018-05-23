@@ -1,4 +1,8 @@
-﻿
+﻿.alert a {
+    color: white !important;
+    text-decoration: underline;
+}
+
 .tablecontainer span.field-validation-error {
     color: red;
 }

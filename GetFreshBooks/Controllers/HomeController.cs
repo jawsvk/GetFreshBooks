@@ -9,7 +9,7 @@ namespace GetFreshBooks.Controllers
 {
     public class HomeController : Controller
     {
-        
+        [HttpGet]
         public ActionResult Index()
         {
             if (System.Web.HttpContext.Current.Session[System.Web.HttpContext.Current.User.Identity.GetUserId()] == null)
@@ -23,6 +23,7 @@ namespace GetFreshBooks.Controllers
             ViewBag.Books = BusinessLogic.GetAllBooks;
             return View();
         }
+
         [HttpPost]
         public ActionResult Index(string isbn)
         {
@@ -30,10 +31,10 @@ namespace GetFreshBooks.Controllers
             BusinessLogic.AddToCart(isbn);
             ViewBag.Categories = BusinessLogic.GetAllCategories;
             ViewBag.Books = BusinessLogic.GetAllBooks;
+            ViewData["addedToCart"] = true;
             return View("Index");         
         }
 
-        // [Authorize(Roles ="User,Admin")]
         public ActionResult About()
         {
             ViewBag.Message = "GetFreshBooks";
