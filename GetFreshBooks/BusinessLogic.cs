@@ -29,12 +29,6 @@ namespace GetFreshBooks
 
         public static void AddToCart(string isbn)
         {
-            if (HttpContext.Current.Session[HttpContext.Current.User.Identity.GetUserId()] == null)
-            {
-                HttpContext.Current.Session[HttpContext.Current.User.Identity.GetUserId()] = new List<CartBook>();
-                HttpContext.Current.Session["total"] = 0;
-                
-            }
 
             List<CartBook> cBookList = (List<CartBook>)HttpContext.Current.Session[HttpContext.Current.User.Identity.GetUserId()];
 
@@ -67,31 +61,26 @@ namespace GetFreshBooks
 
         public static void DeleteFromCart(string isbn)
         {
-
             List<CartBook> cBookList = (List<CartBook>)HttpContext.Current.Session[HttpContext.Current.User.Identity.GetUserId()];
-
-           
-                foreach (CartBook c in cBookList)
+            
+            foreach (CartBook c in cBookList)
+            {
+                if (c.Isbn == isbn)
                 {
-                    if (c.Isbn == isbn)
-                    {
-                        cBookList.Remove(c);
-                        HttpContext.Current.Session["total"] = ((double)HttpContext.Current.Session["total"] - (c.Price * c.Quantity)) - 0 < 0.00 ? 0 : ((double)HttpContext.Current.Session["total"] - (c.Price * c.Quantity));
-
-                        break;
-                    }
-
+                    cBookList.Remove(c);
+                    HttpContext.Current.Session["total"] = ((double)HttpContext.Current.Session["total"] - (c.Price * c.Quantity)) - 0 < 0.00 ? 0 : ((double)HttpContext.Current.Session["total"] - (c.Price * c.Quantity));
+                
+                    break;
                 }
-
-                HttpContext.Current.Session[HttpContext.Current.User.Identity.GetUserId()] = cBookList;
+            }
             
-            
+             HttpContext.Current.Session[HttpContext.Current.User.Identity.GetUserId()] = cBookList;
         }
 
         public static void CheckoutCart()
         {
-            HttpContext.Current.Session[HttpContext.Current.User.Identity.GetUserId()] = null;
-            HttpContext.Current.Session["total"] = null;
+            HttpContext.Current.Session[HttpContext.Current.User.Identity.GetUserId()] = new List<CartBook>();
+            HttpContext.Current.Session["total"] = 0;
         }
 
         public static void CalculatePrice(double price)
