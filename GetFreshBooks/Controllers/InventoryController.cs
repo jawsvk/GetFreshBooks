@@ -11,11 +11,12 @@ namespace GetFreshBooks.Controllers
 
     public class InventoryController : Controller
     {
+       
         Mybooks db = new Mybooks();
         // GET: Inventory
         public ActionResult Index()
         {
-
+            
             return View();
         }
 
