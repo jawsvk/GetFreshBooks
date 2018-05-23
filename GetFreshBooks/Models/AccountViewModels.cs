@@ -65,7 +65,7 @@ namespace GetFreshBooks.Models
     public class RegisterViewModel
     {
         [Required]
-        [Display(Name = "Frist Name")]
+        [Display(Name = "First Name")]
         public string FirstName { get; set; }
 
         [Required]
