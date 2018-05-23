@@ -57,12 +57,12 @@
                     { "data": "Price", "autoWidth": true },
                     {
                         "data": "BookID", "width": "50px", "orderable": false, "render": function (data) {
-                            return '<a class="popup btn btn-default" href="/Inventory/Save/' + data + '">Edit</a>';
+                            return '<a class="popup btn btn-default" href="~/Inventory/Save/' + data + '">Edit</a>';
                         }
                     },
                     {
                         "data": "BookID", "width": "50px", "orderable": false, "render": function (data) {
-                            return '<a class="popup btn btn-danger" href="/Inventory/delete/' + data + '">Delete</a>';
+                            return '<a class="popup btn btn-danger" href="~/Inventory/delete/' + data + '">Delete</a>';
                         }
                     }
                 ]
