@@ -51,7 +51,7 @@
             <div class="col-md-4">
                 <div class="well">
                     <span class="price--label">Total Price</span>
-                    <h1 class="mt-0">S$@System.Web.HttpContext.Current.Session["total"]</h1>
+                    <h1 class="mt-0">S$@System.Web.HttpContext.Current.Session["total"+ HttpContext.Current.User.Identity.GetUserId()]</h1>
 
                     @using (Html.BeginForm("Checkout", "Cart", FormMethod.Post))
                     {
