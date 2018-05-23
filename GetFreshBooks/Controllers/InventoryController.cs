@@ -8,7 +8,7 @@ namespace GetFreshBooks.Controllers
 {
     using Models;
 
-
+    [Authorize(Roles = "Admin")]
     public class InventoryController : Controller
     {
         Mybooks db = new Mybooks();
