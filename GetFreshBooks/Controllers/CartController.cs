@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 
 namespace GetFreshBooks.Controllers
 {
@@ -21,10 +22,14 @@ namespace GetFreshBooks.Controllers
 
         public ActionResult CheckOut()
         {
-            BusinessLogic.CheckoutCart();
-            Random rnd = new Random();
-            ViewBag.Invoice = rnd.Next(123456789, 987654321);
-            return View();
+            string user = System.Web.HttpContext.Current.User.Identity.GetUserId();
+            List<CartBook> clist = (List<CartBook>)System.Web.HttpContext.Current.Session[user];
+            
+                BusinessLogic.CheckoutCart();
+                Random rnd = new Random();
+                ViewBag.Invoice = rnd.Next(123456789, 987654321);
+                return View();
+            
         }
         
     }
