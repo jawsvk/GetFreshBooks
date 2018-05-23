@@ -80,6 +80,19 @@ namespace GetFreshBooks
 
         public static void CheckoutCart()
         {
+            List<CartBook> checkoutList = (List<CartBook>)HttpContext.Current.Session[HttpContext.Current.User.Identity.GetUserId()];
+            foreach(var book in checkoutList)
+            {
+                var bookToCheckout = context.Books.Where(a => a.ISBN == book.Isbn).FirstOrDefault();
+                if (bookToCheckout != null)
+                {
+                    bookToCheckout.Stock = bookToCheckout.Stock - book.Quantity;
+
+                }
+
+                context.SaveChanges();
+            }
+
             HttpContext.Current.Session[HttpContext.Current.User.Identity.GetUserId()] = new List<CartBook>();
             HttpContext.Current.Session["total"+ HttpContext.Current.User.Identity.GetUserId()] = 0;
         }
