@@ -3,11 +3,10 @@
     ViewBag.Title = "CheckOut";
 }
 
-
-<h2>Order Successful!</h2>
+<h1 class="mt-l">Order Successful!</h1>
 <div>
-    Successfully ordered #@ViewBag.Invoice
-    <p>Please check your email for the invoice.</p>
-    <input type="button" value="Go Back Home" onclick="location.href='@Url.Action("Index","Home")'"/>
+    <p>Successfully ordered #@ViewBag.Invoice<br/>
+    Please check your email for the invoice.</p>
+    <input type="button" value="Go Back Home" class="btn btn-primary btn-block" onclick="location.href='@Url.Action("Index","Home")'" />
+    </button>
 </div>
-

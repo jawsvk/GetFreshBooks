@@ -3,6 +3,14 @@
     color: red;
 }
 
+.slick-dots {
+    margin-top: 24px;
+}
+
+.price--label {
+    font-style: bold;
+}
+
 .slick-prev:before {
     color: black !important;
 }

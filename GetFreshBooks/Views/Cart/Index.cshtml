@@ -5,7 +5,6 @@
 @using Microsoft.AspNet.Identity;
 <h2>Cart</h2>
 
-<br />
 <hr />
 
 
@@ -13,67 +12,63 @@
     @*<div>@user</div>
     <div>@User.Identity.GetUserId()</div>*@
 
-    @{List<CartBook> cart = (List<CartBook>)System.Web.HttpContext.Current.Session[User.Identity.GetUserId()];
+    @{List<CartBook> cart = (List<CartBook>)System.Web.HttpContext.Current.Session[User.Identity.GetUserId()];}
 
-    <div class="container">
-
+<div class="container">
+    @{ViewBag.totalPrice = 0; }
+    <div class="row">
         @if (cart != null)
         {
-            ViewBag.totalPrice = 0;
-            <div class="row">
-
-                <div class="row col-md-8">
-
-                    @foreach (var cb in cart)
-                    {
-
-                        <div class="row">
-                            <div class="col-md-4 col-sm-12">
-                                <img src="~/images/@(cb.Isbn).jpg" class="img-thumbnail.max-width: 100%">
-                            </div>
-                            <div class="col-md-4 col-sm-12">
-                                <div>ISBN: @cb.Isbn</div><br />
-                                <div>@cb.BookName</div><br />
-                                <div>@cb.Author</div><br />
-                                <div>@cb.Price</div><br />
-                                <div> Quantity: @cb.Quantity  </div>
-
-                                <br />
-                            </div>
-                            <div class="col-md-4 col-sm-12">
-                                @using (Html.BeginForm("Delete", "Cart", FormMethod.Post))
-                                {
-                                    <input type="hidden" name="isbn" value="@cb.Isbn" />
-                                    <input type="submit" value="Delete" class="btn-danger btn-small" />
-                                }
-                            </div>
+            <div class="col-md-8">
+                @foreach (var cb in cart)
+                {
+                    <div class="row">
+                        <div class="col-md-4 col-sm-12">
+                            <img src="~/images/@(cb.Isbn).jpg" class="img-thumbnail.max-width: 100%">
                         </div>
-                        <hr />
+                        <div class="col-md-4 col-sm-12">
+                            <p>ISBN: @cb.Isbn</p>
+                            <h2 class="mt-0">@cb.BookName</h2>
+                            <p>@cb.Author</p>
+                            <h3>S$@cb.Price</h3>
+                            <p> Quantity: @cb.Quantity </p>
+                            <br />
+                        </div>
+                        <div class="col-md-4 col-sm-12">
+                            @using (Html.BeginForm("Delete", "Cart", FormMethod.Post))
+                            {
+                                <input type="hidden" name="isbn" value="@cb.Isbn" />
+                                <button type="submit" class="btn btn-default pull-right">
+                                    Delete
+                                </button>
+                            }
+                        </div>
+                    </div>
+                    <hr />
+                }
+            </div>
+            <div class="col-md-4">
+                <div class="well">
+                    <span class="price--label">Total Price</span>
+                    <h1 class="mt-0">S$@System.Web.HttpContext.Current.Session["total"]</h1>
 
-
-
-
+                    @using (Html.BeginForm("Checkout", "Cart", FormMethod.Post))
+                    {
+                        <button type="submit" class="btn btn-primary btn-block">
+                            <i class="fa fa-cart-plus"></i> Checkout
+                        </button>
                     }
-
-                </div>
-
-                <div class="col-md-4">
-                    <div class="col-md-4 col-sm-12">
-                        @using (Html.BeginForm("Checkout", "Cart", FormMethod.Post))
-                        {
-                            <input type="submit" value="Checkout" class="btn-danger btn-small" />
-                        }
-                    </div>
-                    <div>
-                        <p>Total Price: @System.Web.HttpContext.Current.Session["total"]</p>
-                    </div>
-
                 </div>
             </div>
+        }
+        else
+        {
+            <div class="col-md-12">
+                <i class="fa fa-shopping-cart fa-5x"></i>
+                <p class="lead">Your Cart is empty...</p>
+                <p>Click @Html.ActionLink("here", "Index", "Home") to return and add more books to your Cart.</p>
 
-
+            </div>
         }
     </div>
-
-
-}
+</div>

@@ -13,7 +13,7 @@ namespace GetFreshBooks.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201805211103341_InitialCreate"; }
+            get { return "201805220202143_InitialCreate"; }
         }
         
         string IMigrationMetadata.Source
