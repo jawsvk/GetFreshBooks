@@ -11,7 +11,7 @@
 
 <h2>Inventory Management</h2>
 <div style="width:90%; margin:0 auto" class="tablecontainer">
-    <a class="popup btn btn-primary" href="/Inventory/Save/0" style="margin-bottom:20px; margin-top:20px;">Add New Book</a>
+    <a runat="server" class="popup btn btn-primary" href="~/Inventory/Save/0" style="margin-bottom:20px; margin-top:20px;">Add New Book</a>
     <table id="myTable">
         <thead>
             <tr>
@@ -43,7 +43,7 @@
         $(document).ready(function () {
             var oTable = $('#myTable').DataTable({
                 "ajax": {
-                    "url": 'loaddata',
+                    "url": '@Url.Action("loaddata", "Inventory")',
                     "type": "get",
                     "datatype": "json"
                 },
@@ -57,19 +57,19 @@
                     { "data": "Price", "autoWidth": true },
                     {
                         "data": "BookID", "width": "50px", "orderable": false, "render": function (data) {
-                            return '<a class="popup btn btn-default" href="~/Inventory/Save/' + data + '">Edit</a>';
+                            return '<a runat="server"class="popup btn btn-default" href="/Inventory/save/' + data + '">Edit</a>';
+                            //return '<a class = "popup btn btn-default" onclick= "@Html.Action("save", "Inventory", new {id="3"})>Edit</a>'
                         }
                     },
                     {
                         "data": "BookID", "width": "50px", "orderable": false, "render": function (data) {
-                            return '<a class="popup btn btn-danger" href="~/Inventory/delete/' + data + '">Delete</a>';
+                            return '<a runat="server" class="popup btn btn-danger" href="/Inventory/delete/' + data + '">Delete</a>';
                         }
                     }
                 ]
 
             });
-
-
+                        
             $('.tablecontainer').on('click', 'a.popup', function (e) {
                 e.preventDefault();
                 OpenPopup($(this).attr('href'));

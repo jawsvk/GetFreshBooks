@@ -8,7 +8,7 @@ namespace GetFreshBooks.Controllers
 {
     using Models;
 
-    [Authorize(Roles = "Admin")]
+
     public class InventoryController : Controller
     {
        
@@ -24,8 +24,24 @@ namespace GetFreshBooks.Controllers
         {
             db.Configuration.LazyLoadingEnabled = false; // if your table is relational, contain foreign key
             var data = db.Books.OrderBy(a => a.BookID).ToList();
-            return Json(new { data }, JsonRequestBehavior.AllowGet);
+            return Json(data, JsonRequestBehavior.AllowGet);
         }
+
+        public ActionResult LoadBookList()
+        {
+            db.Configuration.LazyLoadingEnabled = false; // if your table is relational, contain foreign key
+            var data = db.Books.Select(a=> new Part{BookID=a.BookID, Title=a.Title}).OrderBy(a => a.BookID).ToList();
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult LoadSingle(int id)
+        {
+            db.Configuration.LazyLoadingEnabled = false;
+            var data = db.Books.Where(s => s.BookID == id).ToList();
+
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
 
         public ActionResult save(int id)
         {
